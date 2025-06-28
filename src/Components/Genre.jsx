@@ -23,7 +23,7 @@ const [menu, setMenu] = useState("All");
           </div>
         ))}
       </div>
-      <div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-24 mx-8 sm:mx-16 " >
+      <div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-15 mx-8 sm:mx-16 " >
         {blog_data.filter((blog)=>menu=="All" ? true : blog.category==menu).map((blog)=><Card key={blog._id} blog={blog} />)}
       </div>
     </div>
