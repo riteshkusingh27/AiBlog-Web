@@ -1,29 +1,95 @@
-
-import {useState} from 'react'
-import { useParams } from 'react-router-dom'        
-import { useEffect } from 'react'
-import {blog_data} from '../assets/assets'
+import Moment from "moment";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { blog_data } from "../assets/assets";
+import Navbar from "../Components/Navbar.jsx";
+import { assets, comments_data } from "../assets/assets.js";
 
 const Blog = () => {
-    const {id} = useParams();
-    const [data,setData] = useState(null);
-    // single blog data 
-    const fetchblog = async()=>{
-        blog_data.find(item=>
-            item._id ==id? setData(item) : null
-        )
-    }
+  const { id } = useParams();
+  const [data, setData] = useState(null);
+  const [comment, setComment] = useState(null);
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+  
+  // single blog data
+  const fetchblog = async () => {
+    blog_data.find((item) => (item._id == id ? setData(item) : null));
+  };
+  const fetchComment = async () => {
+    setComment(comments_data);
+  };
+  const addComment = (e) => {
+    e.preventDefault();}
+  // useEffect to fetch b
+  useEffect(() => {
+    fetchblog();
+    fetchComment();
+  }, []);
 
-    // useEffect to fetch b
-    useEffect(()=>{
-        fetchblog();
-    },[])
+  return data ? (
+    <div className="relative">
+      <img
+        src={assets.gradientBackground}
+        alt=""
+        className="absolute -top-50 -z-1"
+      />
+      <Navbar />
+      {/* // title */}
+      <div className="mb-6 text-center ">
+        <p className="text-sm text-gray-500 mb-2">
+          Published on {Moment(data.createdAt).format("MMMM Do YYYY")}
+        </p>
+        <h1 className="text-4xl font-bold text-black  mb-2">{data.title}</h1>
+        <h2 className="text-xl font-medium text-gray-700">{data.subTitle}</h2>
+      </div>
 
-  return  data?(
-    <div>
-        <h1>blog</h1>
+      {/* //thumbnail image and description */}
+      <div className="mx-5 max-w-5xl md:mx-auto mt-6">
+        <img src={data.image} alt="" className="rounded-2xl justify-center" />
+        <div
+          dangerouslySetInnerHTML={{ __html: data.description }}
+          className="mt-6 text-gray-700 text-lg leading-relaxed rich-text"
+        ></div>
+        {/* comment secction  */}
+        <div className="mt-10 mb-10 max-w-4xl ">
+          <p className="font-extrabold mb-4">Comments ({comment.length})</p>
+          <div className="flex flex-col gap-5">
+            {comment.map((item, index) => (
+              <div key={index} className="relative bg-gray-100 rounded p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <img src={assets.user_icon} alt="" className="w-6" />
+                  <p className="font-medium">{item.name}</p>
+                </div>
+                <p className="text-sm max-w-md">{item.content}</p>
+                <div className="absolute right-4 bottom-5 flex items-center gap-3 text-xs">{Moment(item.createdAt).fromNow()}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* comment form */}
+          <div>
+            <p className="font-bold">Add Your Comment</p>
+            <form onSubmit={addComment} className="flex flex-col gap-4 mt-4 mb-10">
+              <input onChange={(e) =>setName(e.target.value)} value={name} type="text" placeholder="Name" required  className="w-full p-2 border border-gray-300 rounded outline-none"/>
+              <textarea
+              onChange={(e) =>setContent(e.target.value)} value={content}
+                placeholder="Comment"
+                required
+                className="w-full p-2 border border-gray-300 rounded outline-none"></textarea>
+                <button type="submit" className="bg-amber-300 hover:scale-102 transition-all cursor-pointer ">Submit</button>
+
+            </form>
+          </div>
+
+
+      </div>
     </div>
-  ) : <div>Loading</div>
-}
+  ) : (
+    <div>Loading</div>
+  );
+};
 
-export default Blog
+export default Blog;

@@ -9,7 +9,7 @@ const Footer = () => {
         py-10 md:py-16 mx-auto max-w-screen-xl"
       >
         <div>
-          <img src={assets.logo} alt="" />
+          <img src={assets.logo} alt="" className="w-50"/>
           <p className="max-w-[300px] mt-6 text-justify">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae
             atque doloremque ab{" "}
