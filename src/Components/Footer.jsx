@@ -11,8 +11,7 @@ const Footer = () => {
         <div>
           <img src={assets.logo} alt="" className="w-50"/>
           <p className="max-w-[300px] mt-6 text-justify">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae
-            atque doloremque ab{" "}
+             Perfect for quick inspiration or consistent content creation — effortless, smart, and personalized blogging starts here.
           </p>
         </div>
 

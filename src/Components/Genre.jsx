@@ -31,3 +31,4 @@ const [menu, setMenu] = useState("All");
 };
 
 export default Genre;
+  

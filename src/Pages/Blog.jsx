@@ -14,7 +14,7 @@ const Blog = () => {
   const [comment, setComment] = useState(null);
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
-  
+
   // single blog data
   const fetchblog = async () => {
     blog_data.find((item) => (item._id == id ? setData(item) : null));
@@ -24,8 +24,9 @@ const Blog = () => {
   };
   const addComment = (e) => {
     e.preventDefault();
-  setName("");
-setContent("");}
+    setName("");
+    setContent("");
+  };
   // useEffect to fetch b
   useEffect(() => {
     fetchblog();
@@ -67,43 +68,58 @@ setContent("");}
                   <p className="font-medium">{item.name}</p>
                 </div>
                 <p className="text-sm max-w-md">{item.content}</p>
-                <div className="absolute right-4 bottom-5 flex items-center gap-3 text-xs">{Moment(item.createdAt).fromNow()}</div>
+                <div className="absolute right-4 bottom-5 flex items-center gap-3 text-xs">
+                  {Moment(item.createdAt).fromNow()}
+                </div>
               </div>
             ))}
           </div>
         </div>
 
         {/* comment form */}
-          <div>
-            <p className="font-bold">Add Your Comment</p>
-            <form onSubmit={addComment} className="flex flex-col gap-4 mt-4 mb-10">
-              <input onChange={(e) =>setName(e.target.value)} value={name} type="text" placeholder="Name" required  className="w-full p-2 border border-gray-300 rounded outline-none"/>
-              <textarea
-              onChange={(e) =>setContent(e.target.value)} value={content}
-                placeholder="Comment"
-                required
-                className="w-full p-2 border border-gray-300 rounded outline-none"></textarea>
-                <button type="submit" className="bg-amber-300 hover:scale-102 transition-all cursor-pointer ">Submit</button>
-
-            </form>
-          </div>
-                         {/* social media links */}
-            <div className="my-24 ">
-
-              <p className="font-extrabold">
-                Share this blog on:
-                <div className="flex">
-                  <img src={assets.facebook_icon} width={50} alt="" />
-                  <img src={assets.twitter_icon} width={50} alt="" />
-                  <img src={assets.googleplus_icon} width={50} alt="" />
-                </div>
-              </p>
+        <div>
+          <p className="font-bold">Add Your Comment</p>
+          <form
+            onSubmit={addComment}
+            className="flex flex-col gap-4 mt-4 mb-10"
+          >
+            <input
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              type="text"
+              placeholder="Name"
+              required
+              className="w-full p-2 border border-gray-300 rounded outline-none"
+            />
+            <textarea
+              onChange={(e) => setContent(e.target.value)}
+              value={content}
+              placeholder="Comment"
+              required
+              className="w-full p-2 border border-gray-300 rounded outline-none"
+            ></textarea>
+            <button
+              type="submit"
+              className="bg-amber-300 hover:scale-102 transition-all cursor-pointer "
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+        {/* social media links */}
+        <div className="my-24 ">
+          <p className="font-extrabold">
+            Share this blog on:
+            <div className="flex">
+              <img src={assets.facebook_icon} width={50} alt="" />
+              <img src={assets.twitter_icon} width={50} alt="" />
+              <img src={assets.googleplus_icon} width={50} alt="" />
             </div>
-
+          </p>
+        </div>
       </div>
       <Footer />
     </div>
-  
   ) : (
     <div>
       <Loader />
