@@ -6,6 +6,7 @@ import { blog_data } from "../assets/assets";
 import Navbar from "../Components/Navbar.jsx";
 import { assets, comments_data } from "../assets/assets.js";
 import Footer from "../Components/Footer.jsx";
+import Loader from "../Components/Loader.jsx";
 
 const Blog = () => {
   const { id } = useParams();
@@ -104,7 +105,9 @@ setContent("");}
     </div>
   
   ) : (
-    <div>Loading</div>
+    <div>
+      <Loader />
+    </div>
   );
 };
 
