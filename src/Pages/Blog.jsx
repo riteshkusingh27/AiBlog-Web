@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { blog_data } from "../assets/assets";
 import Navbar from "../Components/Navbar.jsx";
 import { assets, comments_data } from "../assets/assets.js";
+import Footer from "../Components/Footer.jsx";
 
 const Blog = () => {
   const { id } = useParams();
@@ -21,7 +22,9 @@ const Blog = () => {
     setComment(comments_data);
   };
   const addComment = (e) => {
-    e.preventDefault();}
+    e.preventDefault();
+  setName("");
+setContent("");}
   // useEffect to fetch b
   useEffect(() => {
     fetchblog();
@@ -83,10 +86,23 @@ const Blog = () => {
 
             </form>
           </div>
+                         {/* social media links */}
+            <div className="my-24 ">
 
+              <p className="font-extrabold">
+                Share this blog on:
+                <div className="flex">
+                  <img src={assets.facebook_icon} width={50} alt="" />
+                  <img src={assets.twitter_icon} width={50} alt="" />
+                  <img src={assets.googleplus_icon} width={50} alt="" />
+                </div>
+              </p>
+            </div>
 
       </div>
+      <Footer />
     </div>
+  
   ) : (
     <div>Loading</div>
   );
