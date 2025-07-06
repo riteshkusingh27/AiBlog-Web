@@ -9,6 +9,9 @@ import Footer from "../Components/Footer.jsx";
 import Loader from "../Components/Loader.jsx";
 
 const Blog = () => {
+  // get id from the url 
+
+     
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [comment, setComment] = useState(null);

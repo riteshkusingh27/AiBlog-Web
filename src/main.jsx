@@ -7,7 +7,7 @@ import {AppProvider} from './Context/AppContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-      // we will get access of context data in all components
+      {/* // we will get access of context data in all components  */}
   <AppProvider>
  <App />
   </AppProvider>
