@@ -1,6 +1,19 @@
 import React from "react";
 import { assets } from "../assets/assets";
+import { useAppContext } from "../Context/AppContext.jsx";
+import { useRef } from "react";
 const Header = () => {
+  const inputRef = useRef(null);
+ 
+  const { setInput, input } = useAppContext();
+   const onSubmitHandler =  async (e) => {
+       e.preventDefault()
+       setInput(inputRef.current.value);
+  }
+  const clearSearch =()=>{
+    setInput("");
+    inputRef.current.value = "";
+  }
   return (
     <div className="mx-8 sm:mx-16 xl:mx-24 relative">
       <div className="text-center mt-20 mb-8">
@@ -17,8 +30,10 @@ const Header = () => {
           Join our community of AI enthusiasts and start your blogging journey
           today!
         </p>
-        <form className="flex items-center justify-center gap-2 sm:gap-4 bg-white border border-gray-300 rounded-2xl px-4 py-2 sm:px-6 sm:py-3 shadow-md hover:shadow-lg transition-all duration-300 max-w-md mx-auto">
+        <form  onSubmit={onSubmitHandler}
+        className="flex items-center justify-center gap-2 sm:gap-4 bg-white border border-gray-300 rounded-2xl px-4 py-2 sm:px-6 sm:py-3 shadow-md hover:shadow-lg transition-all duration-300 max-w-md mx-auto">
           <input
+          ref = {inputRef}
             type="text"
             placeholder="Search for Blogs"
             required
@@ -32,6 +47,12 @@ const Header = () => {
             Search{" "}
           </button>
         </form>
+      </div>
+      <div className="text-center">
+        {
+          input && <button  onClick={clearSearch}
+          className="border font-light text-xd py-1 pc-3 rounded-sm shadow-custom-sm cursor-pointer">Clear Search</button>
+        }
       </div>
       <img
         src={assets.gradientBackground}

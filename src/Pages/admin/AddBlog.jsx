@@ -33,7 +33,7 @@ const AddBlog = () => {
       className="flex-1 bg-blue-50/50 text-gray-600 h-full overflow-scroll"
     >
       <div className="bg-white w-full max-w-3xl p-4 md:p-10 sm:p-10  shadow rounded  ">
-        <p>Upload Thumbnail</p>
+        <p>Upload Thumb              nail</p>
 
         <label htmlFor="image">
           <img

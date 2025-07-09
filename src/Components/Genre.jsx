@@ -3,9 +3,23 @@ import { blogCategories, blog_data } from "../assets/assets";
 import { useState } from "react";
 import { motion } from "motion/react";
 import Card from "./Card";
+import { useAppContext } from "../Context/AppContext.jsx";
 
 const Genre = () => {
   const [menu, setMenu] = useState("All");
+  const { blog, input } = useAppContext();
+
+  const searchBlog = () => {
+    if (input == "") {
+      return blog;
+    } else {
+      return blog.filter(
+        (blog) =>
+          blog.title.toLowerCase().includes(input.toLowerCase()) ||
+          blog.category.toLowerCase().includes(input.toLowerCase())
+      );
+    }
+  };
   return (
     <div>
       <div className="flex justify-center gap-4 sm;gap-8 my-10 relative">
@@ -31,7 +45,7 @@ const Genre = () => {
         ))}
       </div>
       <div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-15 mx-8 sm:mx-16 ">
-        {blog_data
+        {searchBlog()
           .filter((blog) => (menu == "All" ? true : blog.category == menu))
           .map((blog) => (
             <Card key={blog._id} blog={blog} />

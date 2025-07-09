@@ -7,24 +7,46 @@ import Navbar from "../Components/Navbar.jsx";
 import { assets, comments_data } from "../assets/assets.js";
 import Footer from "../Components/Footer.jsx";
 import Loader from "../Components/Loader.jsx";
+import { useAppContext } from "../Context/AppContext.jsx";
+import { toast } from "react-hot-toast";
 
 const Blog = () => {
   // get id from the url 
 
-     
+     const {axios} = useAppContext();
+  // useParams is used to get the id from the url
   const { id } = useParams();
   const [data, setData] = useState(null);
-  const [comment, setComment] = useState(null);
+  const [comment, setComment] = useState([]);
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
-
+  console.log(id)
+  
   // single blog data
   const fetchblog = async () => {
-    blog_data.find((item) => (item._id == id ? setData(item) : null));
+   try {    
+     const {data} = await axios.get(`/api/blog/${id}`);
+       
+    data.success ? setData(data.blog) : toast.error(data.message);
+    console.log(data.blog);
+   } catch (error) {
+      toast.error(error.message);
+   }
   };
   const fetchComment = async () => {
-    setComment(comments_data);
-  };
+     try {
+      const {data}  = await axios.post('/api/blog/comments' , {blogId : id} )
+      if(data.success){
+        setComment(data.comment)
+      }
+      else{
+        toast.error(data.message);
+      }
+      
+     } catch (error) {
+      
+     }
+  }
   const addComment = (e) => {
     e.preventDefault();
     setName("");
@@ -128,6 +150,7 @@ const Blog = () => {
       <Loader />
     </div>
   );
-};
+}
 
-export default Blog;
+
+export default Blog
