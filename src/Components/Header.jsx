@@ -16,8 +16,8 @@ const Header = () => {
   }
   return (
     <div className="mx-8 sm:mx-16 xl:mx-24 relative">
-      <div className="text-center mt-20 mb-8">
-        <div className="inline-flex items-center justify-center gap-4 px-6 py-1.5 mb-5 border border-primary/40 bg-primary/10 rounded-full text-sm text-black">
+      <div className="text-center mt-10 mb-8">
+        <div className="inline-flex items-center justify-center gap-4 px-6 py-1.5  border border-primary/40 bg-primary/10 rounded-full text-sm text-blac</div>k">
           <p>New AI feature integrated</p>
           <img src={assets.star_icon} alt="" className="w-2.5" />
         </div>
@@ -41,10 +41,10 @@ const Header = () => {
           />
           <button
             type="submit"
-            className="bg-primary text-white px-8 py-2 m-1.5 rounded hover:scale-105 transition-all cursor-pointer"
+            className="bg-primary text-white px-8 py-2 m-1.5 rounded hover:scale-105 transition-all cursor-pointer "
           >
-            {" "}
-            Search{" "}
+            
+            Search
           </button>
         </form>
       </div>
@@ -58,6 +58,11 @@ const Header = () => {
         src={assets.gradientBackground}
         alt=""
         className="absolute -top-50 -z-1 opacity-80"
+      />
+      <img
+        src={assets.third}
+        alt=""
+        className="absolute -top-50 -z-1 opacity-30"
       />
     </div>
   );

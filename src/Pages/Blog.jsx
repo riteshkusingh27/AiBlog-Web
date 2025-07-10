@@ -54,12 +54,11 @@ const Blog = () => {
         blog: id,
         name,
         content,
-      })
+      });
       if (data.success) {
         toast.success(data.message);
         setName("");
         setContent("");
-    
       } else {
         toast.error(error.message);
       }
@@ -92,7 +91,13 @@ const Blog = () => {
 
       {/* //thumbnail image and description */}
       <div className="mx-5 max-w-5xl md:mx-auto mt-6">
-        <img src={data.image} alt="" className="rounded-2xl justify-center" />
+        <div className="flex justify-center  h-96 w-auto ">
+          <img
+            src={data.image}
+            alt=""
+            className="rounded-2xl justify-center w-2xl "
+          />
+        </div>
         <div
           dangerouslySetInnerHTML={{ __html: data.description }}
           className="mt-6 text-gray-700 text-lg leading-relaxed rich-text"

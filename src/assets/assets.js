@@ -32,6 +32,8 @@ import dashboard_icon_2 from './dashboard_icon_2.svg'
 import dashboard_icon_3 from './dashboard_icon_3.svg'
 import dashboard_icon_4 from './dashboard_icon_4.svg'
 import logo from './logo.jpeg'
+import back from './newbgg.jpg'
+import third from './3d.webp'
 
 
 export  const assets = {
@@ -57,7 +59,9 @@ export  const assets = {
     dashboard_icon_2,
     dashboard_icon_3,
     dashboard_icon_4,
-    logo
+    logo,
+    back,
+    third
   
 }
 export const blogCategories = ['All', 'Technology', 'Startup', 'Lifestyle', 'Finance']

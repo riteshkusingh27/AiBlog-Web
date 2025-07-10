@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import "tailwindcss";
 
-
 *{  
   font-family: "Mulish", sans-serif;
 }
@@ -13,6 +12,7 @@
   --color-primary : #FF6F00;
   --text-primary: #212121;
 }
+
 
 .rich-text { font-size: 15px;  }
 
