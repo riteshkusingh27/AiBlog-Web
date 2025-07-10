@@ -11,46 +11,61 @@ import { useAppContext } from "../Context/AppContext.jsx";
 import { toast } from "react-hot-toast";
 
 const Blog = () => {
-  // get id from the url 
+  // get id from the url
 
-     const {axios} = useAppContext();
+  const { axios } = useAppContext();
   // useParams is used to get the id from the url
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [comment, setComment] = useState([]);
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
-  console.log(id)
-  
-  // single blog data
-  const fetchblog = async () => {
-   try {    
-     const {data} = await axios.get(`/api/blog/${id}`);
-       
-    data.success ? setData(data.blog) : toast.error(data.message);
-    console.log(data.blog);
-   } catch (error) {
-      toast.error(error.message);
-   }
-  };
-  const fetchComment = async () => {
-     try {
-      const {data}  = await axios.post('/api/blog/comments' , {blogId : id} )
-      if(data.success){
-        setComment(data.comment)
-      }
-      else{
-        toast.error(data.message);
-      }
-      
-     } catch (error) {
-      
-     }
-  }
-  const addComment = (e) => {
-    e.preventDefault();
+  console.log(id);
+
+  const clearForm = () => {
     setName("");
     setContent("");
+  };
+
+  // single blog data
+  const fetchblog = async () => {
+    try {
+      const { data } = await axios.get(`/api/blog/${id}`);
+
+      data.success ? setData(data.blog) : toast.error(data.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+  const fetchComment = async () => {
+    try {
+      const { data } = await axios.post("/api/blog/comments", { blogId: id });
+      if (data.success) {
+        setComment(data.comment);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {}
+  };
+  const addComment = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("/api/blog/add-comment", {
+        blog: id,
+        name,
+        content,
+      })
+      if (data.success) {
+        toast.success(data.message);
+        setName("");
+        setContent("");
+    
+      } else {
+        toast.error(error.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   // useEffect to fetch b
   useEffect(() => {
@@ -150,7 +165,6 @@ const Blog = () => {
       <Loader />
     </div>
   );
-}
+};
 
-
-export default Blog
+export default Blog;

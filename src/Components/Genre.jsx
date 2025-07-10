@@ -46,7 +46,7 @@ const Genre = () => {
       </div>
       <div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-15 mx-8 sm:mx-16 ">
         {searchBlog()
-          .filter((blog) => (menu == "All" ? true : blog.category == menu))
+          .filter((blog) => (menu == "All" ? blog.isPublished == true : blog.category == menu && blog.isPublished == true))
           .map((blog) => (
             <Card key={blog._id} blog={blog} />
           ))}

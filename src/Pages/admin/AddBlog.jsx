@@ -2,8 +2,16 @@ import React from "react";
 import { assets, blogCategories } from "../../assets/assets";
 import { useState } from "react";
 import { useEffect, useRef } from "react";
+import { useAppContext } from "../../Context/AppContext.jsx";
+import { toast } from "react-hot-toast";
 import Quill from "quill";
 const AddBlog = () => {
+
+  const { axios } = useAppContext();
+  // state to manage the adding state if the blog is being added to the db state should be isAdding true
+  // if the blog is added successfully then the state should be falsea
+  const  [isAdding, setIsAdding] = useState(false);
+
   const editorRef = useRef(null);
   const quillRef = useRef(null);
 
@@ -14,7 +22,38 @@ const AddBlog = () => {
   const [isPublished, setIsPublished] = useState(false);
 
   const onSubmitHandler = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault()
+      setIsAdding(true);
+      const blog ={
+        title,
+        subTitle,
+        description : quillRef.current.root.innerHTML,
+        category , isPublished
+
+      }
+      const formData = new FormData()
+  formData.append("image", image);
+  formData.append("blog", JSON.stringify(blog));
+
+  const {data} = await axios.post("/api/blog/add-blog", formData)
+  if(data.success){
+    toast.success(data.message);
+    setImage(false)
+    setTitle("");
+    setCategory("Startup")
+    setSubTitle("");
+    quillRef.current.root.innerHTML = ''
+  }
+  else{
+    toast.error(data.message)
+  }
+    } catch (error) {
+      toast.error(error.message)
+    }
+    finally{
+      setIsAdding(false)
+    }
   };
 
   const generateContent = async (params) => {
@@ -64,7 +103,7 @@ const AddBlog = () => {
           placeholder="Type here"
           required
           className="w-full max-w-lg mt-2 p-2 border border-gray-300 outline-none rounded "
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => setSubTitle(e.target.value)}
           value={subTitle}
         />
 
@@ -106,10 +145,10 @@ const AddBlog = () => {
           
         </div>
         <button
+        disabled={isAdding}
             type="submit"
             className="mt-8 w-40 bg-primary h-10 text-white rounded cursor-pointer text-sm"
-          >
-            Add Blog
+          >{isAdding ? "Adding..." : "Add Blog"}
           </button>
       </div>
     </form>

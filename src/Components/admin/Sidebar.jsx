@@ -4,7 +4,7 @@ import { assets } from "../../assets/assets";
 
 const Sidebar = () => {
   return (
-    <div className="flex flex-col border-r border-gray-200 w-full md:w-64 h-screen bg-white">
+    <div className="flex flex-col border-r border-gray-200 w-full md:w-max h-screen bg-white">
       <NavLink
         end={true}
         to="/admin"
